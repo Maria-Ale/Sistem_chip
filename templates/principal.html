@@ -1,0 +1,225 @@
+{%extends 'base.html'%}
+
+{%block title%}Sistem Chip - Inicio{%endblock%}
+
+{%block content%}
+<main>
+  <!-- Modal -->
+  <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+          <div class="w-100 pt-1 mb-5 text-right">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form action="" method="get" class="modal-content modal-body border-0 p-0">
+              <div class="input-group mb-2">
+                  <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                  <button type="submit" class="input-group-text bg-success text-light">
+                      <i class="fa fa-fw fa-search text-white"></i>
+                  </button>
+              </div>
+          </form>
+      </div>
+  </div>
+
+  <!-- Start Banner Hero -->
+  <div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="container">
+                <div class="row p-5">
+                    <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                        <img class="img-fluid" src="{{ url_for('static', filename='img/banner_img_01.jpg') }}" alt="">
+                    </div>
+                    <div class="col-lg-6 mb-0 d-flex align-items-center">
+                        <div class="text-align-left align-self-center">
+                            <h1 class="h1" style="color: #61e961;"><b>Sistem</b> Chip</h1>
+                            <h3 class="h2">Ingeniería y Tecnología</h3>
+                            <p>
+                                SistemChip es una plataforma líder en línea dedicada a la ingeniería y tecnología, ofreciendo una amplia gama de productos electrónicos de última generación. Desde celulares y cámaras hasta computadoras y accesorios, nuestra tienda en línea proporciona a los clientes acceso a una selección diversa de productos de alta calidad.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="container">
+                <div class="row p-5">
+                    <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                        <img class="img-fluid" src="{{ url_for('static', filename='img/banner_img_02.jpg') }}" alt="">
+                    </div>
+                    <div class="col-lg-6 mb-0 d-flex align-items-center">
+                        <div class="text-align-left">
+                            <h1 class="h1" style="color: #61e961;"><b>Sistem</b> Chip</h1>
+                            
+                            <p>
+                                <strong>Excelencia: </strong> Nos comprometemos a ofrecer productos y servicios de la más alta calidad, superando las expectativas de nuestros clientes en todo momento. <br>
+                                <strong>Innovación: </strong>  Buscamos constantemente nuevas formas de mejorar y adaptarnos a los cambios tecnológicos, para proporcionar a nuestros clientes soluciones innovadoras.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="container">
+                <div class="row p-5">
+                    <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                        <img class="img-fluid" src="{{ url_for('static', filename='img/banner_img_03.jpg') }}" alt="">
+                    </div>
+                    <div class="col-lg-6 mb-0 d-flex align-items-center">
+                        <div class="text-align-left">
+                            <h1 class="h1" style="color: #61e961;"><b>Sistem</b> Chip</h1>
+                            
+                            <p>
+                                <strong>Integridad: </strong> Actuamos con honestidad, transparencia y ética en todas nuestras interacciones, manteniendo la confianza de nuestros clientes en todo momento.<br>
+                                <strong>Orientación al cliente: </strong>  Ponemos las necesidades y la satisfacción de nuestros clientes en el centro de todo lo que hacemos, brindando un servicio excepcional y una experiencia de compra personalizada.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#template-mo-zay-hero-carousel" role="button" data-bs-slide="prev">
+        <i class="fas fa-chevron-left"></i>
+    </a>
+    <a class="carousel-control-next text-decoration-none w-auto pe-3" href="#template-mo-zay-hero-carousel" role="button" data-bs-slide="next">
+        <i class="fas fa-chevron-right"></i>
+    </a>
+</div>
+
+
+  <!-- End Banner Hero -->
+
+
+  <!-- Start Categories of The Month -->
+  <section class="container py-5">
+      <div class="row text-center pt-3">
+          <div class="col-lg-6 m-auto">
+              <h1 class="h1">Categorias Del Mes</h1>
+              <p>
+                  Aquí encontrarás las categorias mas visitadas por nuestros clientes
+              </p>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-12 col-md-4 p-5 mt-3">
+              <a href="#"><img src="{{ url_for('static', filename='img/category_img_01.jpg') }}" class="rounded-circle img-fluid border"></a>
+              <h5 class="text-center mt-3 mb-3">Computadores</h5>
+              <p class="text-center"><a class="btn btn-success" href="{{ url_for('tienda') }}" >Ir a la tienda</a></p>
+          </div>
+          <div class="col-12 col-md-4 p-5 mt-3">
+              <a href="#"><img src="{{ url_for('static', filename='img/category_img_02.jpg') }}" class="rounded-circle img-fluid border"></a>
+              <h2 class="h5 text-center mt-3 mb-3">Celulares</h2>
+              <p class="text-center"><a class="btn btn-success" href="{{ url_for('tienda') }}">Ir a la tienda</a></p>
+          </div>
+          <div class="col-12 col-md-4 p-5 mt-3">
+              <a href="#"><img src="{{ url_for('static', filename='img/category_img_03.jpg') }}" class="rounded-circle img-fluid border"></a>
+              <h2 class="h5 text-center mt-3 mb-3">Cámaras</h2>
+              <p class="text-center"><a class="btn btn-success" href="{{ url_for('tienda') }}">Ir a la tienda</a></p>
+          </div>
+      </div>
+  </section>
+  <!-- End Categories of The Month -->
+
+
+  <!-- Start Featured Product -->
+  <section class="bg-light">
+      <div class="container py-5">
+          <div class="row text-center py-3">
+              <div class="col-lg-6 m-auto">
+                  <h1 class="h1">Productos Más Vendidos</h1>
+                  <p>
+                      Aquí vas a encontrar los productos más visitados y más comprados por nuestros clientes
+                  </p>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-12 col-md-4 mb-4">
+                  <div class="card h-100">
+                      <a href="{{ url_for('tienda') }}">
+                          <img src="{{ url_for('static', filename='img/feature_prod_01.jpg') }}" class="card-img-top" alt="...">
+                      </a>
+                      <div class="card-body">
+                          <ul class="list-unstyled d-flex justify-content-between">
+                              <li>
+                                  <i class="text-warning fa fa-star"></i>
+                                  <i class="text-warning fa fa-star"></i>
+                                  <i class="text-warning fa fa-star"></i>
+                                  <i class="text-muted fa fa-star"></i>
+                                  <i class="text-muted fa fa-star"></i>
+                              </li>
+                              <li class="text-muted text-right">$120.000</li>
+                          </ul>
+                          <a href="{{ url_for('tienda') }}" class="h2 text-decoration-none text-dark">Ventilador Para Portatil</a>
+                          <p class="card-text">
+                              Base soporte refrigerante para portátil con ventilador color negro
+                          </p>
+                          <p class="text-muted">Calificaciones (24)</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-12 col-md-4 mb-4">
+                  <div class="card h-100">
+                      <a href="{{ url_for('tienda') }}">
+                          <img src="{{ url_for('static', filename='img/feature_prod_02.jpg') }}" class="card-img-top" alt="...">
+                      </a>
+                      <div class="card-body">
+                          <ul class="list-unstyled d-flex justify-content-between">
+                              <li>
+                                  <i class="text-warning fa fa-star"></i>
+                                  <i class="text-warning fa fa-star"></i>
+                                  <i class="text-warning fa fa-star"></i>
+                                  <i class="text-muted fa fa-star"></i>
+                                  <i class="text-muted fa fa-star"></i>
+                              </li>
+                              <li class="text-muted text-right">$320.000</li>
+                          </ul>
+                          <a href="{{ url_for('tienda') }}" class="h2 text-decoration-none text-dark">Reloj Inteligente</a>
+                          <p class="card-text">
+                              Encuentra el Smartwatch ideal para tu actividades diarias o el deporte que practicas
+                          </p>
+                          <p class="text-muted">Calificaciones (48)</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-12 col-md-4 mb-4">
+                  <div class="card h-100">
+                      <a href="tienda.html">
+                          <img src="{{ url_for('static', filename='img/feature_prod_03.jpg') }}" class="card-img-top" alt="...">
+                      </a>
+                      <div class="card-body">
+                          <ul class="list-unstyled d-flex justify-content-between">
+                              <li>
+                                  <i class="text-warning fa fa-star"></i>
+                                  <i class="text-warning fa fa-star"></i>
+                                  <i class="text-warning fa fa-star"></i>
+                                  <i class="text-warning fa fa-star"></i>
+                                  <i class="text-warning fa fa-star"></i>
+                              </li>
+                              <li class="text-muted text-right">$480.000</li>
+                          </ul>
+                          <a href="{{ url_for('tienda') }}" class="h2 text-decoration-none text-dark">Cámara De Seguridad</a>
+                          <p class="card-text">
+                              Monitorea lo que pasa en tu casa con esta cámara de seguridad de alta resolución.
+                          </p>
+                          <p class="text-muted">Calificaciones (74)</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- End Featured Product -->
+</main>
+
+ 
+
+
+{%endblock%}

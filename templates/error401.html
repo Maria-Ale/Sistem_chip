@@ -1,0 +1,11 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<body>
+    <div class="error-container">
+        <h1>Error 401 - No autorizado</h1>
+        <p>No tienes permisos para acceder a la página solicitada. Verifica tus credenciales e inténtalo de nuevo.</p>
+        <img src="{{ url_for('static', filename='img/error401.jpg') }}" alt="Error 401">
+    </div>
+</body>
+{%endblock%}

@@ -1,0 +1,279 @@
+{%extends 'base.html'%}
+
+{%block title%}Sistem Chip - Tienda{%endblock%}
+
+{%block content%}
+
+
+<!-- Start Content -->
+<div class="container py-2">
+    <div class="row">
+        <div class="col-lg-3">
+            <h1 class="logo h5 align-self-center" style="font-size: 50px; color: #61e961;">Categorias</h1>
+            <ul class="list-unstyled templatemo-accordion">
+                <li class="pb-3">
+                    <a href="{{ url_for('computadores') }}" class="h5 text-decoration-none">Computadores</a>
+                </li>
+                
+                <li class="pb-3">
+                    <a href="{{ url_for('celulares') }}" class="h5 text-decoration-none">Celulares</a>
+                </li>
+                <li class="pb-3">
+                    <a href="{{ url_for('camaras') }}" class="h5 text-decoration-none">Cámaras</a>
+                </li>
+                <li class="pb-3">
+                    <a href="{{ url_for('impresoras') }}" class="h5 text-decoration-none">Impresoras</a>
+                </li>
+                <li class="pb-3">
+                    <a href="{{ url_for('accesorios') }}" class="h5 text-decoration-none">Accesorios</a>
+                </li>
+                <li class="pb-3">
+                    <a href="{{ url_for('relojes') }}" class="h5 text-decoration-none">Relojes Inteligentes</a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="col-lg-9">
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="list-inline shop-top-menu pb-1 pt-1">
+                        <li class="list-inline-item">
+                            <a class="h3 text-dark text-decoration-none mr-3" href="#">Todo</a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a class="h3 text-dark text-decoration-none mr-3" href="#"></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a class="h3 text-dark text-decoration-none" href="#"></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6 pb-4">
+                    <div class="d-flex">
+                        <select class="form-control">
+                            <option>Buscar</option>
+                            <option>a - z</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                {% for producto in producto %}
+                    <div class="col-sm-4 mb-4">
+                        <br><br>
+                        <div class="card" style="background-color: rgb(252, 249, 249); color: rgb(2, 2, 2);">
+                            <img class="card-img-top" src="{{ url_for('static', filename='img/' + producto.imagen) }}" style="width: 100%; height: 400px; object-fit: contain;" onmouseover="this.style.opacity=0.5;" onmouseout="this.style.opacity=1;">
+                            <div class="card-body text-center">
+                                <h5 class="card-title" style="color: rgb(25, 170, 32);">{{ producto.nombre }}</h5>
+                                <p class="card-text">Categoría: {{ producto.categoria }} <br> Precio: {{ producto.precio }}</p>
+                                <a href="#" class="btn btn-primary rounded-pill agregar-carrito" data-producto-id="{{ producto.producto_id }}" style="font-weight: bold; color: rgb(253, 253, 253); background-color: #61e961;">Agregar al carrito</a>
+                                <button class="btn btn-info mt-2" data-toggle="modal" data-target="#productoModal" data-id="{{ producto.producto_id }}" data-nombre="{{ producto.nombre }}" data-imagen="{{ url_for('static', filename='img/' + producto.imagen) }}" data-categoria="{{ producto.categoria }}" data-descripcion="{{ producto.descripcion }}" data-precio="{{ producto.precio }}">Ver Detalles</button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div style="justify-content: center;" class="pagination">
+                {{ pagination.links }}
+            </div>
+
+<!----------------------- Modal ------------------------>
+    <div class="modal fade" id="productoModal" tabindex="-1" role="dialog" aria-labelledby="productoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productoModalLabel">Detalles del Producto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img id="productoImagen" class="img-fluid" src="" alt="Imagen del producto">
+                        </div>
+                        <div class="col-md-6">
+                            <h5 id="productoNombre"></h5>
+                            <p id="productoCategoria"></p>
+                            <p id="productoDescripcion"></p>
+                            <p id="productoPrecio"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!----------------------- Fin Modal ------------------------>
+
+<!-- jQuery and Bootstrap JavaScript -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<script>
+    $('#productoModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Botón que activó el modal
+        var id = button.data('id');
+        var nombre = button.data('nombre');
+        var imagen = button.data('imagen');
+        var categoria = button.data('categoria');
+        var descripcion = button.data('descripcion');
+        var precio = button.data('precio');
+
+        var modal = $(this);
+        modal.find('.modal-title').text('Detalles del Producto');
+        modal.find('#productoNombre').text(nombre);
+        modal.find('#productoImagen').attr('src', imagen);
+        modal.find('#productoCategoria').text('Categoría: ' + categoria);
+        modal.find('#productoDescripcion').text('Descripción: ' + descripcion);
+        modal.find('#productoPrecio').text('Precio: ' + precio);
+    });
+</script>
+
+            
+            <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+            
+            <script>
+                var $ = jQuery.noConflict();
+            </script>
+            
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    // Manejar el clic del botón "Agregar al carrito"
+                    document.querySelectorAll(".agregar-carrito").forEach(function (button) {
+                        button.addEventListener("click", function (event) {
+                            event.preventDefault();
+            
+                            // Obtener el ID del producto desde el atributo data-producto-id
+                            var productoId = this.getAttribute("data-producto-id");
+            
+                            // Realizar la solicitud fetch para agregar al carrito
+                            fetch("/agregar-al-carrito/" + productoId, {
+                                method: "POST"
+                            })
+                            .then(function (response) {
+                                if (!response.ok) {
+                                    throw new Error("Error al agregar al carrito");
+                                }
+                                // Si la respuesta es exitosa, redirigir a la página del carrito
+                                window.location.href = "/ver-carrito";
+                            })
+                            .catch(function (error) {
+                                console.error("Error al realizar la solicitud fetch:", error);
+                            });
+                        });
+                    });
+                });
+            </script>
+            
+
+           
+            
+
+            <div div="row">
+                <ul class="pagination pagination-lg justify-content-end">
+                    <li class="page-item disabled">
+                        <a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="#" tabindex="-1">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link rounded-0 shadow-sm border-top-0 border-left-0 text-dark" href="#">3</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- End Content -->
+
+<!-- Start Brands -->
+<section class="bg-light py-5">
+    <div class="container my-4">
+        <div class="row text-center py-3">
+            <div class="col-lg-6 m-auto">
+                <h1 class="h1">Marcas</h1>
+                <p>
+                    Estas son algunas de las marcas que usamos para nuestras ventas y reparaciones.
+                </p>
+            </div>
+            <div class="col-lg-9 m-auto tempaltemo-carousel">
+                <div class="row d-flex flex-row">
+                    <!--Controls-->
+                    <div class="col-1 align-self-center">
+                        <a class="h1" href="#templatemo-slide-brand" role="button" data-bs-slide="prev">
+                            <i class="text-light fas fa-chevron-left"></i>
+                        </a>
+                    </div>
+                    <!--End Controls-->
+
+                    <!--Carousel Wrapper-->
+                    <div class="col">
+                        <div class="carousel slide carousel-multi-item pt-2 pt-md-0" id="templatemo-slide-brand" data-bs-ride="carousel">
+                            <!--Slides-->
+                            <div class="carousel-inner product-links-wap" role="listbox">
+
+                                 <!--First slide-->
+                                 <div class="carousel-item active">
+                                    <div class="row">
+                                        <div class="col-3 p-md-5">
+                                            <a href="#"><img class="img-fluid brand-img"  src="{{ url_for('static', filename='img/apple.png') }}" alt="Brand Logo"></a>
+                                        </div>
+                                        <div class="col-3 p-md-5">
+                                            <a href="#"><img class="img-fluid brand-img"  src="{{ url_for('static', filename='img/lenovo.png') }}" alt="Brand Logo"></a>
+                                        </div>
+                                        <div class="col-3 p-md-5">
+                                            <a href="#"><img class="img-fluid brand-img" s src="{{ url_for('static', filename='img/asus.png') }}" alt="Brand Logo"></a>
+                                        </div>
+                                        <div class="col-3 p-md-5">
+                                            <a href="#"><img class="img-fluid brand-img"  src="{{ url_for('static', filename='img/samsumg.png') }}" alt="Brand Logo"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End First slide-->
+
+                                <!--Second slide-->
+                                <div class="carousel-item">
+                                    <div class="row">
+                                        <div class="col-3 p-md-5">
+                                            <a href="#"><img class="img-fluid brand-img"  src="{{ url_for('static', filename='img/hik.jpg') }}" alt="Brand Logo"></a>
+                                        </div>
+                                        <div class="col-3 p-md-5">
+                                            <a href="#"><img class="img-fluid brand-img"  src="{{ url_for('static', filename='img/bosch.png') }}" alt="Brand Logo"></a>
+                                        </div>
+                                        <div class="col-3 p-md-5">
+                                            <a href="#"><img class="img-fluid brand-img"  src="{{ url_for('static', filename='img/panasonic.png') }}" alt="Brand Logo"></a>
+                                        </div>
+                                        <div class="col-3 p-md-5">
+                                            <a href="#"><img class="img-fluid brand-img"  src="{{ url_for('static', filename='img/xiaomi.png') }}" alt="Brand Logo"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End Second slide-->
+                            </div>
+                            <!--End Slides-->
+                        </div>
+                    </div>
+                    <!--End Carousel Wrapper-->
+
+                    <!--Controls-->
+                    <div class="col-1 align-self-center">
+                        <a class="h1" href="#templatemo-slide-brand" role="button" data-bs-slide="next">
+                            <i class="text-light fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                    <!--End Controls-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End Brands-->
+
+
+{%endblock%}

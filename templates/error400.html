@@ -1,0 +1,12 @@
+{%extends 'base.html'%}
+
+
+{%block content%}
+<body>
+    <div class="error-container">
+        <h1>Error 400 - Solicitud incorrecta</h1>
+        <p>La solicitud enviada al servidor es incorrecta o defectuosa. Verifica los parámetros de la solicitud e inténtalo de nuevo.</p>
+        <img class="img1" src="{{ url_for('static', filename='img/error400.jpg') }}" alt="Error 400" width="600" height="500">
+    </div>
+</body>
+{%endblock%}

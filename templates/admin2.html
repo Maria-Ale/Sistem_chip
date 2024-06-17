@@ -1,0 +1,135 @@
+{%extends 'baseAdmin.html'%}
+
+
+{%block content%}
+<h1 class="centered-header">Administrador</h1>
+
+<div class="container mt-5">
+    <div class="text-center">
+        <button id="toggleFormBtn" class=" btn btn-secondary">Agregar Producto</button>
+    </div>
+
+    <!-- Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close btn btn-secondary">&times;</span>
+                <form id="productForm" action="{{ url_for('agregarPro') }}" method="POST" enctype="multipart/form-data">
+                <!-- Campos del nuevo producto -->
+                <label for="nombre">Nombre:</label>
+                <input type="text" name="nombre" required class="form-control mb-3">
+
+                <label for="imagen">Imagen:</label>
+                <input type="file" name="imagen" accept="image/*" required class="form-control mb-3">
+
+                <label for="categoria">Categoría:</label>
+                <select name="categoria" required class="form-control mb-3">
+                    <option value="computadores">Computadores</option>
+                    <option value="celulares">Celulares</option>
+                    <option value="camaras">Cámaras</option>
+                    <option value="impresoras">Impresoras</option>
+                    <option value="accesorios">Accesorios</option>
+                    <option value="relojes">Relojes</option>
+                </select>
+
+                <label for="descripcion">Descripción:</label>
+                <input type="text" name="descripcion" required class="form-control mb-3">
+
+                <label for="precio">Precio:</label>
+                <input type="text" name="precio" required class="form-control mb-3">
+                <div class="text-center">
+                    <button type="submit" class="btn btn-secondary btn-lg">Agregar Producto</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Obtener el modal
+    var modal = document.getElementById("productModal");
+
+    // Obtener el botón que abre el modal
+    var btn = document.getElementById("toggleFormBtn");
+
+    // Obtener el elemento <span> que cierra el modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // Cuando el usuario hace clic en el botón, abre el modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // Cuando el usuario hace clic en <span> (x), cierra el modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // Cuando el usuario hace clic en cualquier lugar fuera del modal, lo cierra
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+<div class="container">
+    <h1 class="text-center" style="font-family: 'Copperplate', serif;">
+        <span style="color: rgb(48, 236, 48);">Gestión de los productos Sistem Chip</span>
+    </h1>
+    <div class="row">
+        {% for producto in producto %}
+            <div class="col-sm-4 mb-4">
+                <br><br>
+                <div class="card" style="background-color: rgb(248, 245, 245); color: rgb(5, 5, 5); height: 500px;">
+                    <img class="card-img-top" src="{{ url_for('static', filename='img/' + producto.imagen) }}" style="width: 100%; height: 300px; object-fit: contain;" onmouseover="this.style.opacity=0.5;" onmouseout="this.style.opacity=1;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title" style="color: yellow;">{{ producto.nombre }}</h5>
+                        <p class="card-text">Categoría: {{ producto.categoria }} <br> Precio: {{ producto.precio }}</p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                        <form action="/eliminar-producto" method="POST">
+                            <input type="hidden" value="{{ producto.producto_id }}" name="producto_id">
+                            <button type="submit" class="btn btn-secondary">Eliminar</button> 
+                        </form>
+                    </div>                                       
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+    
+
+<!-- Modal agregar -->
+<div class="modal fade" id="admin-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">NUEVO ARTICULO</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/agregar-productos" method="post" enctype="multipart/form-data">
+                    <label>Titulo</label>
+                    <input type="text" class="form-control mb-3" name="nombre">
+                    <label>Categoria</label>
+                    <input type="text" class="form-control mb-3" name="categoria">
+                    <label>Precio</label>
+                    <input type="number" class="form-control mb-3" name="precio">
+                    <label>Imagen</label>
+                    <input type="file" class="form-control mb-3" name="imagen" accept=".jpg, .png, .jpeg">
+                    <button type="submit" class="btn btn-primary w-100">Guardar</button>
+                </form>
+                <br><br>
+            </div>
+        </div>
+    </div>
+  </div>
+
+<script src="{{ url_for('static', filename='js/productos.js') }}"></script>
+
+
+
+    
+
+{%endblock%}

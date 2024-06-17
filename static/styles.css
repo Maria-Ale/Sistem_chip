@@ -1,0 +1,258 @@
+body {
+    background-color: rgb(252, 250, 250);
+    font-family: 'Chewy', cursive;
+        
+}
+.same-size-img {
+    height: 400px; /* ajusta la altura  */
+    object-fit: cover; /* para mantener la proporción de la imagen */
+}
+
+.image {
+    transition: transform 0.3s ease-in-out;
+}
+
+.image:hover {
+    transform: scale(1.1);
+}
+/* Centrar el contenido de la barra de navegación */
+.nav-item,
+.navbar {
+    display: flex;
+    justify-content: center;
+    color: rgb(12, 12, 12);
+    font-family: 'Chewy', cursive;
+}
+
+/* Cambiar el tipo de letra  */
+.iniciar{
+    font-size: 40px;
+}
+.regis{
+    font-size: 40px;
+}
+.nav-item,
+.logear,
+.registra,
+.navbar-brand,
+.navbar-nav .nav-link,
+.dropdown-menu {
+    font-family: 'VinaSans', sans-serif; /*  fuente */
+    font-weight: bold;
+    color: rgb(5, 5, 5); /* color del texto  */
+    font-size: 15px;
+    font-family: 'TAHOMA', cursive;
+}
+
+.nav-options {
+    list-style: none;
+    display: flex;
+    gap: 100px;  /* Añade espacio entre las opciones de navegación */
+    margin-right: 20px;  /* Margen derecho para la última opción (ajusta según sea necesario) */
+}
+
+/* Cambiar el fondo de la barra de navegación */
+.navbar {
+    background-color: rgb(10, 10, 10); /*  el color de fondo  */
+}
+.card{
+    border-color: rgb(90, 231, 109);
+    border-style: groove;
+}
+.btn {
+    background-color:  rgb(90, 231, 109);
+    border-color:  rgb(90, 231, 109);
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.form-register{
+    width: 400px;
+    background: palevioletred;
+    padding: 30px;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 4px;
+    color: white;
+    box-shadow: 7px 13px 37px #eb13a3;
+}
+.controls{
+    width: 100%;
+    background: palevioletred;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    border: 1px solid #c51fa1;
+    font-size: 18px;
+}
+.form-register p{
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+}
+.form-register .botons{
+    width: 100%;
+    background: rgb(253, 251, 252);
+    border: none;
+    padding: 12px;
+    color: palevioletred;
+    margin: 16px 0;
+    font-size: 16px;
+}
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+.cajaL {
+    max-width: 600px;
+    margin: auto; /* Centra horizontalmente */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: palevioletred;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+/* Estilos del formulario */
+.caja {
+    max-width: 400px;
+    margin: 20px auto; /* Centra el formulario */
+    padding: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #007bff;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* Estilos para el formulario de contacto */
+.container {
+    margin-top: 50px;
+}
+
+h1.text-center {
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+.bg-green {
+    background-color: #489248; /* Verde */
+    color: white; /* Para asegurarte de que el texto sea legible */
+}
+/* boton enviar contacto*/
+.btn-white {
+    background-color: white;
+    color: #28a745; /* Ajusta este color según sea necesario */
+    border: 1px solid #28a745; /* Ajusta el color del borde según sea necesario */
+}
+
+.btn-white:hover {
+    background-color: #f8f9fa; /* Un color ligeramente diferente para el efecto hover */
+    color: #218838; /* Ajusta el color del texto en hover según sea necesario */
+    border-color: #218838; /* Ajusta el color del borde en hover según sea necesario */
+}
+/* Adminsitrador admin2*/
+.centered-header {
+    text-align: center; /* Centra el texto horizontalmente */
+    font-family: 'Arial', sans-serif; /* Cambia a la fuente que prefieras */
+    font-weight: bold; /* Opcional: hace que la letra sea negrita */
+    font-size: 2.5rem; /* Ajusta el tamaño de la fuente */
+    color: #333; /* Ajusta el color del texto */
+    margin-top: 20px; /* Ajusta el margen superior */
+    margin-bottom: 20px; /* Ajusta el margen inferior */
+}

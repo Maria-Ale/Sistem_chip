@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block title %}Sistem Chip - Carrito{% endblock %}
+
+{% block content %}
+<br><br>
+
+<body class="bg-blue text-white" style="background-color: #61e961;">
+    <div class="container mt-5">
+        <div class="d-flex justify-content-center align-items-center">
+            <a class="navbar-brand logo h5" style="font-size: 50px; color: #f8faf8;">Carrito de Compras</a>
+        </div>        
+        
+
+        {% for item in carrito %}
+        <div class="card mb-3">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="{{ url_for('static', filename='img/' + item.imagen) }}" alt="{{ item.nombre }}"
+                        class="card-img">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.nombre }}</h5>
+                        <p class="card-text">Precio: ${{ item.precio }}</p>
+                        <p class="font-weight-bold total" style="color: black;"
+                            id="precio-total-{{ item.id_carrito }}">{{ item.cantidad }} x ${{ item.precio }}</p>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="cantidad-{{ item.id_carrito }}">Cantidad</label>
+                            </div>
+                            <input type="number" class="form-control cantidad" id="cantidad-{{ item.id_carrito}}"
+                                value="{{ item.cantidad }}" min="1"
+                                onchange="actualizarPrecioProducto('{{ item.id_carrito }}', '{{ item.precio }}')">
+                        </div>
+                        <button class="btn btn-danger" onclick="eliminarProducto('{{ item.id_carrito }}')">Eliminar</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Agrega el botón de comprar -->
+        <button class="btn btn-light text-success font-weight-bold mx-auto d-block" onclick="comprarYEliminar('{{ item.id_carrito }}', '{{ item.nombre }}', '{{ item.precio }}', '{{ item.cantidad }}')">Comprar</button>
+        {% endfor %}
+         <!-- Agrega un elemento para mostrar el precio total -->
+         <p class="font-weight-bold text-right" id="precio-total">Precio Total: $0.00</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function eliminarProducto(idCarrito) {
+            if (confirm("¿Estás seguro de eliminar este producto del carrito?")) {
+                fetch("/eliminar-del-carrito/" + idCarrito, {
+                    method: "POST"
+                })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error("Error al eliminar del carrito");
+                    }
+                    // Si la respuesta es exitosa, recargar la página y actualizar el precio total
+                    location.reload();
+                    actualizarPrecioTotal();
+                })
+                .catch(function (error) {
+                    console.error("Error al eliminar del carrito:", error);
+                });
+            }
+        }
+    
+        function comprarYEliminar(idCarrito, nombre, precio, cantidad) {
+            if (confirm("¿Estás seguro de comprar este producto?")) {
+                const cantidadSeleccionada = parseInt(document.getElementById(`cantidad-${idCarrito}`).value);
+
+                // Calcular el total para este producto
+                const precioTotalProducto = precio * cantidadSeleccionada;
+
+                // Enviar una solicitud para eliminar el producto del carrito
+                fetch("/eliminar-del-carrito/" + idCarrito, {
+                    method: "POST"
+                })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error("Error al eliminar del carrito");
+                    }
+
+                    // Eliminar todos los elementos del carrito
+                    document.querySelectorAll(".card").forEach(function (card) {
+                        card.remove();
+                    });
+
+                    // Mostrar el mensaje de alerta con el precio total del carrito
+                    alert(`Compra exitosa: ${cantidadSeleccionada} ${nombre}(s) por un total de $${precioTotalProducto.toFixed(2)}.`);
+
+                    // Actualizar el precio total a cero
+                    document.getElementById("precio-total").textContent = "Precio Total: $0.00";
+                })
+                .catch(function (error) {
+                    console.error("Error al eliminar del carrito:", error);
+                });
+            }
+        }
+
+    
+        function actualizarPrecioProducto(idCarrito, precio) {
+            const cantidad = parseInt(document.getElementById(`cantidad-${idCarrito}`).value);
+            const precioTotal = precio * cantidad;
+            document.getElementById(`precio-total-${idCarrito}`).textContent = `Total: $${precioTotal.toFixed(2)}`;
+            actualizarPrecioTotal();
+        }
+        
+        function actualizarPrecioTotal() {
+            let precioTotal = 0;
+
+            // Itera sobre cada producto en el carrito
+            $(".card").each(function () {
+                const cantidad = parseInt($(this).find(".cantidad").val());
+                const precioUnitario = parseFloat($(this).find(".card-text").text().replace("Precio: $", ""));
+                const precioTotalProducto = cantidad * precioUnitario;
+                precioTotal += precioTotalProducto;
+            });
+
+            // Actualiza el precio total en el elemento correspondiente
+            $("#precio-total").text(`Precio Total: $${precioTotal.toFixed(2)}`);
+        }
+       
+    </script>
+    
+{% endblock %}

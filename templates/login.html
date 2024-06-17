@@ -1,0 +1,71 @@
+{%extends 'base.html'%}
+
+{%block title%}Sistem Chip - Login{%endblock%}
+
+{%block content%}
+
+<div class="logear">
+  <div class="row">
+    <!-- Formulario de Inicio de Sesión -->
+    <div class="col-md-6">
+        <div class="cajaL">
+            <label class="iniciar">Iniciar sesión</label>
+            <form class="form-control" action="/login" method="post">
+                <!-- ... (resto del formulario de inicio de sesión) ... -->
+                <div class="form-group">
+                  <label for="txtNombre">Nombre</label>
+                  <input type="text" class="form-control" id="txtNombre" placeholder="Ingrese su nombre" name="txtNombre">
+                </div>
+                <div class="form-group">
+                  <label for="txtApellido">Apellido</label>
+                  <input type="text" class="form-control" id="txtApellido" placeholder="Ingrese su apellido" name="txtApellido">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Correo</label>
+                  <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Ingrese su correo" name="txtCorreo">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Contraseña</label>
+                  <input type="password" class="form-control" id="exampleInputPassword" placeholder="Ingrese su contraseña" name="txtPassword">
+                </div>
+                <center>
+                  <button type="submit" class="btn btn-primary">Ingresar</button>
+                </center>
+            </form>
+        </div>
+    </div>
+
+    <!-- Formulario de Registro -->
+    <div class="col-md-6">
+        <div class="cajaL">
+            <label class="regis">Registro</label>
+            <form class="form-control" action="crear-registro" method="POST">
+                <!-- ... (resto del formulario de registro) ... -->
+                <div class="form-group">
+                  <label for="txtNombreR">Nombre</label>
+                  <input type="text" class="form-control" id="txtNombreR" placeholder="Ingrese su nombre" name="txtNombreR">
+                </div>
+                <div class="form-group">
+                  <label for="txtApellidoR">Apellido</label>
+                  <input type="text" class="form-control" id="txtApellidoR" placeholder="Ingrese su apellido" name="txtApellidoR">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmailR">Correo</label>
+                  <input type="email" class="form-control" id="exampleInputEmailR" aria-describedby="emailHelp" placeholder="Ingrese un correo" name="txtCorreoR">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPasswordR">Contraseña</label>
+                  <input type="password" class="form-control" id="exampleInputPasswordR" placeholder="Ingrese una contraseña" name="txtPasswordR">
+                </div>
+                <center>
+                    <button type="submit" class="btn btn-primary">Registrarse</button>
+                </center>
+            </form>
+        </div>
+    </div>
+  </div>
+ 
+</div>
+<div style="height: 300px;"></div>
+
+{%endblock%}

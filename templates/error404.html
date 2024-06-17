@@ -1,0 +1,12 @@
+{%extends 'base.html'%}
+
+
+{%block content%}
+<body>
+    <div class="error-container">
+        <h1>Error 404 - No encontrado</h1>
+        <p>La página que estás buscando no se encuentra en el servidor. Verifica la URL e inténtalo de nuevo.</p>
+        <img class="img1" src="{{ url_for('static', filename='img/error404.jpeg') }}" alt="Error 404" width="600" height="500">
+    </div>
+</body>
+{%endblock%}

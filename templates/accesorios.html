@@ -1,0 +1,123 @@
+{%extends 'base.html'%}
+
+{%block title%}Sistem Chip - Computadores{%endblock%}
+
+{%block content%}
+<div class="col-md-6 m-auto text-center">
+    <a class=" logo h5 align-self-center" style="font-size: 50px; color: #070707;">ACCESORIOS</a>
+</div>
+
+<div class="container">
+    <div class="row">    
+    {% for producto in producto %}
+        {%if producto.categoria == 'accesorios'%}
+            <div class="card" style="width: 16rem; margin-right: 10px; margin-bottom: 20px;">
+                <img class="card-img-top" src="{{ url_for('static', filename='img/' + producto.imagen) }}" style="width: 100%; height: 400px; object-fit: contain;" onmouseover="this.style.opacity=0.5;" onmouseout="this.style.opacity=1;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ producto.nombre }}</h5>
+                    <p class="card-text">categoria: {{ producto.categoria }} <br> Precio: {{ producto.precio }}</p>
+                    <!-- Botón para agregar un producto al carrito -->
+                    <a href="#" class="btn btn-primary rounded-pill agregar-carrito" data-producto-id="{{ producto.producto_id }}" style="font-weight: bold; color: rgb(253, 253, 253); background-color: #61e961;">Agregar al carrito</a>
+                    <button class="btn btn-info mt-2" data-toggle="modal" data-target="#productoModal" data-id="{{ producto.producto_id }}" data-nombre="{{ producto.nombre }}" data-imagen="{{ url_for('static', filename='img/' + producto.imagen) }}" data-categoria="{{ producto.categoria }}" data-descripcion="{{ producto.descripcion }}" data-precio="{{ producto.precio }}">Ver Detalles</button>
+                </div>
+            </div>
+        {%endif%}
+    {% endfor %}
+    <!-- Mostrar la paginación -->
+    <div style="justify-content: center;" class="pagination">
+        {{ pagination.links }}
+    </div>
+</div> 
+<!----------------------- Modal ------------------------>
+<div class="modal fade" id="productoModal" tabindex="-1" role="dialog" aria-labelledby="productoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productoModalLabel">Detalles del Producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img id="productoImagen" class="img-fluid" src="" alt="Imagen del producto">
+                    </div>
+                    <div class="col-md-6">
+                        <h5 id="productoNombre"></h5>
+                        <p id="productoCategoria"></p>
+                        <p id="productoDescripcion"></p>
+                        <p id="productoPrecio"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!----------------------- Fin Modal ------------------------>
+
+<!-- jQuery and Bootstrap JavaScript -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<script>
+$('#productoModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Botón que activó el modal
+    var id = button.data('id');
+    var nombre = button.data('nombre');
+    var imagen = button.data('imagen');
+    var categoria = button.data('categoria');
+    var descripcion = button.data('descripcion');
+    var precio = button.data('precio');
+
+    var modal = $(this);
+    modal.find('.modal-title').text('Detalles del Producto');
+    modal.find('#productoNombre').text(nombre);
+    modal.find('#productoImagen').attr('src', imagen);
+    modal.find('#productoCategoria').text('Categoría: ' + categoria);
+    modal.find('#productoDescripcion').text('Descripción: ' + descripcion);
+    modal.find('#productoPrecio').text('Precio: ' + precio);
+});
+</script>
+
+        
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+        
+        <script>
+            var $ = jQuery.noConflict();
+        </script>
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Manejar el clic del botón "Agregar al carrito"
+                document.querySelectorAll(".agregar-carrito").forEach(function (button) {
+                    button.addEventListener("click", function (event) {
+                        event.preventDefault();
+        
+                        // Obtener el ID del producto desde el atributo data-producto-id
+                        var productoId = this.getAttribute("data-producto-id");
+        
+                        // Realizar la solicitud fetch para agregar al carrito
+                        fetch("/agregar-al-carrito/" + productoId, {
+                            method: "POST"
+                        })
+                        .then(function (response) {
+                            if (!response.ok) {
+                                throw new Error("Error al agregar al carrito");
+                            }
+                            // Si la respuesta es exitosa, redirigir a la página del carrito
+                            window.location.href = "/ver-carrito";
+                        })
+                        .catch(function (error) {
+                            console.error("Error al realizar la solicitud fetch:", error);
+                        });
+                    });
+                });
+            });
+        </script>
+        
+<a href="{{ url_for('tienda') }}" class="btn btn-primary">Regresar a la tienda</a>
+
+{%endblock%}

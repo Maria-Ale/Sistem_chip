@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chewy&display=swap">
+    <link rel="stylesheet" href="https://fonts.google.com/specimen/Shrikhand">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <title>{%block title%} SISTEMCHIP {%endblock%}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Estilos para el modal */
+        .modal {
+            display: none; /* Ocultar el modal por defecto */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 5px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+     <style>
+         .card-img-top {
+             width: 100%;
+             height: 400px;
+             object-fit: contain;
+         }
+     </style>
+</head>
+<body>
+
+<!-- Inicio Barra de navegación -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light" data-bs-theme="bg-purple">
+  <div class="container-fluid d-flex align-items-center">
+      <div class="navbar-brand">
+        <a class="navbar-brand  logo h5 align-self-center" style="font-size: 50px; color: #61e961;">SISTEMCHIP</a>
+      </div>
+      <div class="navbar-brand">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="navbar-brand" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <!-- Otras opciones de navegación -->
+                  <li class="nav-item">
+                    <a class="nav-link" href="/">Principal</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{url_for('tienda')}}">Tienda</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{url_for('nosotros')}}">Nosotros</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{url_for('contacto')}}">Contáctanos</a>
+                  </li>
+                  <li class="navbar-brand">
+                    <a class="nav-icon position-relative text-decoration-none" href="{{ url_for('login') }}">
+                        <i class="fa fa-fw fa-user text-dark mr-1"></i>
+                    </a>
+                </li>
+                <li class="navbar-brand">
+                    <a class="nav-icon position-relative text-decoration-none" href="{{ url_for('ver_carrito') }}">
+                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                    </a>
+                </li>
+                <li>
+                    {% if 'logueado' in session and session['logueado'] %}
+                        <p class="navbar-brand">{{ session['nombre'] }} {{ session['apellido'] }}</p>                        
+                        <a class="nav-icon position-relative text-decoration-none" href="{{ url_for('cerrar_sesion') }}">
+                            <i class="fa fa-fw fa-sign-out-alt text-dark mr-1"></i>
+                        </a>
+                        
+                    {% else %}
+                                                
+                    {% endif %}
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </div>
+</nav>
+
+
+  {%block content%}
+    
+  {%endblock%}
+<!-- Fin Barra de navegación -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </div>
+
+
+   <!--         FOOTER                 -->
+    <!-- Start Footer -->
+    <footer class="bg-dark" id="tempaltemo_footer">
+      <div class="container">
+          <div class="row">
+  
+              <div class="col-md-4 pt-5">
+                  <h2 class="h2 border-bottom pb-3 border-light logo" style="color: #61e961;">Sistem Chip</h2>
+                  <ul class="list-unstyled text-light footer-link-list">
+                      <li>
+                          <i class="fas fa-map-marker-alt fa-fw"></i>
+                          <a class="text-decoration-none" href="tel:010-020-0340">El Espino</a>
+                      </li>
+                      <li>
+                          <i class="fa fa-phone fa-fw"></i>
+                          <a class="text-decoration-none" href="tel:010-020-0340">3026604610</a>
+                      </li>
+                      <li>
+                          <i class="fa fa-envelope fa-fw"></i>
+                          <a class="text-decoration-none" href="mailto:info@company.com">brayanperez@systemchip.com </a>
+                      </li>
+                  </ul>
+              </div>
+  
+              <div class="col-md-4 pt-5">
+                  <h2 class="h2 border-bottom pb-3 border-light" style="color: #61e961;">Productos</h2>
+                  <ul class="list-unstyled text-light footer-link-list">
+                      <li><a class="text-decoration-none" href="{{ url_for('computadores') }}" >Computadores</a></li>
+                      <li><a class="text-decoration-none" href="{{ url_for('celulares') }}" >Celulares</a></li>
+                      <li><a class="text-decoration-none" href="{{ url_for('impresoras') }}" >Impresoras</a></li>
+                      <li><a class="text-decoration-none" href="{{ url_for('accesorios') }}" >Accesorios</a></li>
+                      <li><a class="text-decoration-none" href="{{ url_for('camaras') }}" >Camaras</a></li>
+                      <li><a class="text-decoration-none" href="{{ url_for('relojes') }}" >Relojes Inteligentes</a></li>
+                  </ul>
+              </div>
+  
+              <div class="col-md-4 pt-5">
+                  <h2 class="h2 border-bottom pb-3 border-light" style="color: #61e961;">Información</h2>
+                  <ul class="list-unstyled text-light footer-link-list">
+                      <li><a class="text-decoration-none" href="#">Principal</a></li>
+                      <li><a class="text-decoration-none" href="{{ url_for('nosotros') }}" >Sobre Nosotros</a></li>
+                      <li><a class="text-decoration-none" href="{{ url_for('contacto') }}" >Ubicación</a></li>
+                      <li><a class="text-decoration-none" href="{{ url_for('contacto') }}" >Contactanos</a></li>
+                  </ul>
+              </div>
+  
+          </div>
+  
+          <div class="row text-light mb-4">
+              <div class="col-12 mb-3">
+                  <div class="w-100 my-3 border-top border-light"></div>
+              </div>
+              <div class="col-auto me-auto">
+                  <ul class="list-inline text-left footer-icons">
+                      <li class="list-inline-item border border-light rounded-circle text-center">
+                          <a class="text-light text-decoration-none" target="_blank" href="http://facebook.com/"><i class="fab fa-facebook-f fa-lg fa-fw"></i></a>
+                      </li>
+                      <li class="list-inline-item border border-light rounded-circle text-center">
+                          <a class="text-light text-decoration-none" target="_blank" href="https://www.instagram.com/"><i class="fab fa-instagram fa-lg fa-fw"></i></a>
+                      </li>
+                      <li class="list-inline-item border border-light rounded-circle text-center">
+                          <a class="text-light text-decoration-none" target="_blank" href="https://twitter.com/"><i class="fab fa-twitter fa-lg fa-fw"></i></a>
+                      </li>
+                      <li class="list-inline-item border border-light rounded-circle text-center">
+                          <a class="text-light text-decoration-none" target="_blank" href="https://www.linkedin.com/"><i class="fab fa-linkedin fa-lg fa-fw"></i></a>
+                      </li>
+                  </ul>
+              </div>
+              <div class="col-auto">
+                  <label class="sr-only" for="subscribeEmail">Correo Electronico</label>
+                  <div class="input-group mb-2">
+                      <input type="text" class="form-control border-light" style="color: #61e961;" id="subscribeEmail" placeholder="Correo Electronico">
+                      <div class="input-group-text btn-success " style="color: #61e961;">Suscribirse</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  
+      <div class="w-100 bg-black py-3">
+          <div class="container">
+              <div class="row pt-2">
+                  <div class="col-12">
+                      <p class="text-left text-light">
+                          Copyright &copy; 2024 Sistem Chip 
+                      </p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  
+  </footer>
+  <!-- End Footer -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

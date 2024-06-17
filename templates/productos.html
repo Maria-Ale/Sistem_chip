@@ -1,0 +1,54 @@
+{%extends 'base.html'%}
+
+{%block title%}Sistem Chip - Productos{%endblock%}
+
+{%block content%}
+<br>
+<div class="container">
+    <div class="row">    
+    {% for producto in producto %}
+            <div class="card" style="width: 16rem; margin-right: 10px; margin-bottom: 20px;">
+                <img class="card-img-top" src="{{ url_for('static', filename='img/' + producto.imagen) }}" style="width: 100%; height: 400px; object-fit: contain;" onmouseover="this.style.opacity=0.5;" onmouseout="this.style.opacity=1;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ producto.nombre }}</h5>
+                    <p class="card-text">categoria: {{ producto.categoria }} <br> Precio: {{ producto.precio }}</p>
+                    <!-- Botón para agregar un producto al carrito -->
+                    <button class="agregar-carrito-btn" data-producto-id="{{ producto.id }}">Agregar al carrito</button>
+                </div>
+            </div>
+    {% endfor %}
+    <!-- Mostrar la paginación -->
+    <div style="justify-content: center;" class="pagination">
+        {{ pagination.links }}
+    </div>
+</div> 
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Manejar el clic del botón "Agregar al carrito"
+        $(".agregar-carrito-btn").click(function (event) {
+            event.preventDefault();
+
+            // Obtener el ID del producto desde el atributo de datos
+            var productoId = $(this).data("producto-id");
+
+            // Realizar la solicitud AJAX para agregar al carrito
+            $.ajax({
+                type: "POST",
+                url: "/agregar_al_carrito/" + productoId,
+                success: function (response) {
+                    // Redirigir a la página del carrito después de agregar
+                    window.location.href = "/ver-carrito";
+                },
+                error: function (error) {
+                    console.error("Error al agregar al carrito:", error.responseJSON.error);
+                    // Manejar el error según sea necesario
+                }
+            });
+        });
+    });
+</script>
+
+{%endblock%}
