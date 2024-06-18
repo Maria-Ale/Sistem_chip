@@ -10,9 +10,9 @@ logging.basicConfig(filename='app.log', level=logging.DEBUG)
 
 app = Flask(__name__)
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_HOST'] = 'bljr0vq6jy8iuwxtyunr-mysql.services.clever-cloud.com'
+app.config['MYSQL_USER'] = 'ufu46vgsoygusygy'
+app.config['MYSQL_PASSWORD'] = '9c0J9t2qPTs2vifvEFQ1'
 app.config['MYSQL_DB'] = 'sistemchip'
 app.config['UPLOAD_FOLDER'] = 'static/img'
 app.secret_key = 'alejandra_da'
